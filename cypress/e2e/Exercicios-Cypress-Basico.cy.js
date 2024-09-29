@@ -1,12 +1,15 @@
 /// <reference types="Cypress" />
 
 describe('Curso Cypress - Básico', () => {
+  const THREE_SECONDS = 3000
+
   beforeEach(() => {
     cy.viewport(1280, 720)
     cy.visit('../../src/index.html')
   })
 
   it('EX0 - preenche os campos obrigatórios e envia o formulário', () => {
+    cy.clock() // necessario para usar o tick
     cy.title()
       .should('be.equal', 'Central de Atendimento ao Cliente TAT')
     cy.get('[data-cy="firstName"]')
@@ -24,6 +27,9 @@ describe('Curso Cypress - Básico', () => {
     cy.get('span[class="success"] > strong')
       .should('be.visible')
       .should('be.text', 'Mensagem enviada com sucesso.')
+    cy.tick(THREE_SECONDS) // avança 3 segundos no tempo do navegador (tempo para a msg de sucesso desaparecer)
+    cy.get('span[class="success"] > strong')
+      .should('not.be.visible')
   })
 
   it('EX1 - alterando delay do type', () => {
