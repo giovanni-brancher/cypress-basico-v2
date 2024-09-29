@@ -262,7 +262,13 @@ describe('Curso Cypress - Básico', () => {
       .get('#white-background').should('contain', 'Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
   })
 
-  it('EX21 - ', () => {
-    
+  it('EX21 - faz uma requisição HTTP', () => {
+    cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+      .should(function(response) {
+        const {status, statusText, body} = response
+        expect(status).to.equal(200)
+        expect(statusText).to.equal('OK')
+        expect(body).to.include('CAC TAT')
+      })
   })
 })
