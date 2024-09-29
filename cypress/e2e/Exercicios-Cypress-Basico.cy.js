@@ -196,7 +196,7 @@ describe('Curso Cypress - Básico', () => {
   it('EX15 - seleciona um arquivo da pasta fixtures', () => {
     cy.get('[id="file-upload"]')
       .should('not.have.value')
-      .selectFile('Cypress/fixtures/example.json')
+      .selectFile('./Cypress/fixtures/example.json')
       .should(function ($input) {
         expect($input[0].files[0].name).to.equal('example.json')
       })
@@ -205,7 +205,7 @@ describe('Curso Cypress - Básico', () => {
   it('EX16 - seleciona um arquivo simulando um drag-and-drop', () => {
     cy.get('[id="file-upload"]')
       .should('not.have.value')
-      .selectFile('Cypress/fixtures/example.json', { action: 'drag-drop' })
+      .selectFile('./Cypress/fixtures/example.json', { action: 'drag-drop' })
       .should(function ($input) {
         expect($input[0].files[0].name).to.equal('example.json')
       })
