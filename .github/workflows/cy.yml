@@ -1,5 +1,7 @@
 name: End-to-end tests 🧪
 on: [push]
+env:
+  USERNAME: "Teste Giovanni"
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
@@ -11,10 +13,7 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v4.1.0
-      - name: Save a state
-        run: |
-          echo "::save-state name=username::myUsername"
-      - name: Access the state
+      - name: Access the environment variable
         run: |
           echo "The saved state is:"
-          echo "${{ state.username }}"
+          echo "${{ env.USERNAME }}"
